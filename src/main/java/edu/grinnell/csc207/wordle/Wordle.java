@@ -1,4 +1,4 @@
-package edu.grinnell.csc207.checkers;
+package edu.grinnell.csc207.wordle;
 
 import edu.grinnell.csc207.util.ArrayUtils;
 import edu.grinnell.csc207.util.IOUtils;
@@ -15,13 +15,12 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * A sample one-player game (is that a puzzle?). Intended as a potential
- * use of our Matrix interface.
+ * The game logic behind a basic implementation of popular word game 'wordle'.
  *
  * @author Myles Bohrer-Purnell
  * @author Sebastian Manza
  */
-public class Checkers {
+public class Wordle {
   // +-----------+---------------------------------------------------
   // | Constants |
   // +-----------+
@@ -29,84 +28,17 @@ public class Checkers {
   /**
    * The default width.
    */
-  static final int DEFAULT_WIDTH = 10;
+  static final int DEFAULT_WIDTH = 5;
 
   /**
    * The default number of rows.
    */
-  static final int DEFAULT_HEIGHT = 8;
+  static final int DEFAULT_HEIGHT = 6;
 
   // +----------------+----------------------------------------------
   // | Helper methods |
   // +----------------+
 
-  /**
-   * Print the insturctions.
-   *
-   * @param pen
-   *  The printwriter used to print the instructions.
-   */
-  public static void printInstructions(PrintWriter pen) {
-    pen.println("""
-                Welcome to the game of checkers.
-
-                Command-line arguments:
-
-                * -w width - set up the width of the checkers board
-                * -h height - set up the height of the checkers board
-
-                The game board is a grid of X's, O's, *'s, and blanks.
-
-                Your goal is to eliminate as many X's as possible while
-                keeping as many O's as possible.
-
-                You have four basic moves. You can do each move up to
-                three times. You can also SKIP a step and just let the
-                *'s destroy things.
-
-                * RR: remove a row
-                * RC: remove a column
-                * IR: insert a blank row
-                * IC: insert a blank column
-                * SKIP: Do nothing, just let the *'s move.
-
-                After each move, any *'s eliminate one neighboring piece
-                and move over that piece, using the following priority grid.
-
-                    1|6|7
-                    -+-+-
-                    5|*|4
-                    -+-+-
-                    8|3|2
-                """);
-  } // printInstructions(PrintWriter)
-
-  /**
-   * Print the results of the game.
-   *
-   * @param pen
-   *   What to use for printing.
-   * @param board
-   *   The game board at the end.
-   */
-  static void printResults(PrintWriter pen, Matrix<String> board) {
-    int xs = 0;
-    int os = 0;
-    for (int row = 0; row < board.height(); row++) {
-      for (int col = 0; col < board.width(); col++) {
-        String cell = board.get(row, col);
-        if ("O".equals(cell)) {
-          ++os;
-        } else if ("X".equals(cell)) {
-          ++xs;
-        } // if/else
-      } // for
-    } // for
-    pen.println();
-    pen.println("Xs remaining: " + xs);
-    pen.println("Os remaining: " + os);
-    pen.println("Score: " + (os - xs));
-  } // printResults
 
   /**
    * Process the board, eliminating any matching cells. (The efficiency
