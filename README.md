@@ -4,14 +4,14 @@ A mini-project for Grinnell's CSC-207.
 
 Authors:
 
-* Your Name Here
-* Your Name Here
+* Myles Bohrer-Purnell
+* Sebastian Manza
 * Samuel A. Rebelsky (Starter code)
 
 Instructions:
 
 * **Please add instructions for running the game**
-
+s
 Acknowledgements:
 
 Source:
