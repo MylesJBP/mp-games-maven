@@ -1,6 +1,7 @@
 package edu.grinnell.csc207.wordle;
 
 import java.io.PrintWriter;
+import java.util.Scanner;
 import edu.grinnell.csc207.util.Matrix;
 
 /**
@@ -28,17 +29,42 @@ public class wordleUI {
                 """);
   } // printInstructions(PrintWriter)
 
-  
-  /**
-   * Print the results of the game.
-   *
-   * @param pen
-   *   What to use for printing.
-   * @param board
-   *   The game board at the end.
-   */
-  static void printResults(PrintWriter pen, Matrix<String> board) {
-    pen.println(board.numResults());
-  } // printResults
-  
-}
+  public static void main(String[] args) {
+    String wordLength;
+    String numGuesses;
+    Scanner eyes = new Scanner(System.in);
+    PrintWriter pen = new PrintWriter(System.out, true);
+    String curWord;
+
+    /* Prompt user for length and number of guesses */
+    pen.println("Enter the length of your word:");
+    wordLength = eyes.nextLine();
+    int wordLengthInt = Integer.parseInt(wordLength);
+    pen.println("Enter the maximum limit of guesses:");
+    numGuesses = eyes.nextLine();
+    int numGuessesInt = Integer.parseInt(numGuesses);
+    wordleBoard currentBoard = new wordleBoard(wordLength, numGuesses);
+
+    printInstructions(pen);
+
+    /* Repeatedly check the users most recent entry and print the result. */
+    while(gamenotFinished) {
+      currentBoard.printBoard(pen);
+      while(true) {
+        pen.println("Enter your guess:");
+        curWord = eyes.nextLine();
+        if (curWord.length() != wordLengthInt) {
+          System.err.println("Word is incorrect length. Please enter a word of" + wordLengthInt + " characters.");
+        } else if(!curWord.inList()) {
+          System.err.println(curWord + "is not a valid word.");
+        } else {
+          break;
+        } //if/else
+      } //while
+      currentBoard.add(curWord);
+    } // while
+
+    printResults(pen);
+  } //main
+
+} // class wordleUI
