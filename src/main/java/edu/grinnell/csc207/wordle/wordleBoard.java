@@ -55,6 +55,7 @@ public class wordleBoard {
             for (int inc = 0; inc < notLets.length; inc++) {
               if (curWord.charAt(i) == notLets[inc]) {
                 resultLets[i] = curWord.charAt(i) + "-Y";
+                notLets[inc] = ' '; // change in some way, removes the element from the list.
                 break;
               } else if (inc == notLets.length-1) {
                 // else, just add the word as is

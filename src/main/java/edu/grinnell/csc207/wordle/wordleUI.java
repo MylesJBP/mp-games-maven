@@ -1,7 +1,9 @@
 package edu.grinnell.csc207.wordle;
 
 import java.io.PrintWriter;
+import java.time.chrono.ThaiBuddhistChronology;
 import java.util.Scanner;
+
 import edu.grinnell.csc207.util.Matrix;
 import edu.grinnell.csc207.wordle.wordleBoard;
 
@@ -31,9 +33,28 @@ public class wordleUI {
                 """);
   } // printInstructions(PrintWriter)
 
+    /**
+   * Print the results of the game.
+   *
+   * @param pen
+   *   What to use for printing.
+   * @param board
+   *   The game board at the end.
+   */
+  static void printResults(PrintWriter pen, wordleBoard board, boolean winCon, int numGuess, String finWord) {
+    if (winCon) {
+      pen.println("Congratulation");
+      pen.println("You guessed the word " + finWord + " in " + numGuess + " guesses!");
+    } else {
+      pen.println("You lose!");
+      pen.println("The word was " + finWord);
+    } // if/else
+  } // printResults
+
   public static void main(String[] args) {
     String wordLength;
     String numGuesses;
+    boolean winCon = false;
     Scanner eyes = new Scanner(System.in);
     PrintWriter pen = new PrintWriter(System.out, true);
     String curWord;
@@ -50,7 +71,7 @@ public class wordleUI {
     numGuesses = eyes.nextLine();
     int numGuessesInt = Integer.parseInt(numGuesses);
     wordleBoard currentBoard = new wordleBoard(wordLengthInt, numGuessesInt);
-    
+
     // need to set finWord to a random word of length wordLength
     // from our list of words.
     // we could also allow the user to select a word number
@@ -75,7 +96,7 @@ public class wordleUI {
       currentBoard.add(curWord, finWord, numGuessesInt);
       curGuess += 1;
     } // whiles
-    printResults(pen);
+    printResults(pen, currentBoard, winCon, numGuessesInt, finWord);
   } //main
 
 } // class wordleUI
