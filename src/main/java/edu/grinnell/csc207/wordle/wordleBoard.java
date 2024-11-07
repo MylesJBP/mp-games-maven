@@ -20,7 +20,7 @@ public class wordleBoard {
    * @param numGuesses
    */
   public wordleBoard(int wordLength, int numGuesses) {
-    this.board = new MatrixV0<String>(wordLength, numGuesses);
+    this.board = new MatrixV0<String>(wordLength, numGuesses, " ");
   } //wordleBoard
 
   /**
