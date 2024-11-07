@@ -58,10 +58,12 @@ public class wordleUI {
     Scanner eyes = new Scanner(System.in);
     PrintWriter pen = new PrintWriter(System.out, true);
     String curWord;
+    String wordIndex;
     // word that is randomly/selectively chosen to solve
     String finWord;
     // current guess of the user
     int curGuess = 0;
+    String customed;
 
     /* Prompt user for length and number of guesses */
     pen.println("Enter the length of your word:");
@@ -69,12 +71,23 @@ public class wordleUI {
     int wordLengthInt = Integer.parseInt(wordLength);
     pen.println("Enter the maximum limit of guesses:");
     numGuesses = eyes.nextLine();
+    pen.println("Would you like a random word or an indexed word (Y/N)?: ");
+    customed = eyes.nextLine();
+    // need to check for correct message
+    if (customed.equals("Y")) {
+      pen.println("What word index do you want?: ");
+      wordIndex = eyes.nextLine();
+      // read file index and get word, need to check to make sure correct size and everything
+    } else {
+      // get random one from file
+    } // if/else
     int numGuessesInt = Integer.parseInt(numGuesses);
     wordleBoard currentBoard = new wordleBoard(wordLengthInt, numGuessesInt);
 
     // need to set finWord to a random word of length wordLength
     // from our list of words.
     // we could also allow the user to select a word number
+    // I also know we will probably have to shift some of this to the Wordle file
 
     // print starting instructions
     printInstructions(pen);
