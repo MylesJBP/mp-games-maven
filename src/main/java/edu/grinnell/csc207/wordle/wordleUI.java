@@ -3,6 +3,8 @@ package edu.grinnell.csc207.wordle;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import edu.grinnell.csc207.util.Matrix;
+import edu.grinnell.csc207.wordle.wordleBoard;
+
 
 /**
  * The basic text based interface behind the wordle game.
@@ -35,6 +37,10 @@ public class wordleUI {
     Scanner eyes = new Scanner(System.in);
     PrintWriter pen = new PrintWriter(System.out, true);
     String curWord;
+    // word that is randomly/selectively chosen to solve
+    String finWord;
+    // current guess of the user
+    int curGuess = 0;
 
     /* Prompt user for length and number of guesses */
     pen.println("Enter the length of your word:");
@@ -43,8 +49,13 @@ public class wordleUI {
     pen.println("Enter the maximum limit of guesses:");
     numGuesses = eyes.nextLine();
     int numGuessesInt = Integer.parseInt(numGuesses);
-    wordleBoard currentBoard = new wordleBoard(wordLength, numGuesses);
+    wordleBoard currentBoard = new wordleBoard(wordLengthInt, numGuessesInt);
+    
+    // need to set finWord to a random word of length wordLength
+    // from our list of words.
+    // we could also allow the user to select a word number
 
+    // print starting instructions
     printInstructions(pen);
 
     /* Repeatedly check the users most recent entry and print the result. */
@@ -55,15 +66,15 @@ public class wordleUI {
         curWord = eyes.nextLine();
         if (curWord.length() != wordLengthInt) {
           System.err.println("Word is incorrect length. Please enter a word of" + wordLengthInt + " characters.");
-        } else if(!curWord.inList()) {
+        } else if(!inList(curWord)) {
           System.err.println(curWord + "is not a valid word.");
         } else {
           break;
         } //if/else
       } //while
-      currentBoard.add(curWord);
-    } // while
-
+      currentBoard.add(curWord, finWord, numGuessesInt);
+      curGuess += 1;
+    } // whiles
     printResults(pen);
   } //main
 
