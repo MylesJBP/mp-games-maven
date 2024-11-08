@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author Myles Bohrer-Purnell
  * @author Sebastian Manza
  */
-public class wordleUI {
+public class WordleUI {
 
   /**
    * Print the instructions.
