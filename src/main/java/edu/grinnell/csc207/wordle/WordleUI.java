@@ -41,7 +41,7 @@ public class WordleUI {
    * @param numGuess THe number of guesses so far.
    * @param finWord The correct word.
    */
-  static void printResults(PrintWriter pen, wordleBoard board, boolean winCon, int numGuess,
+  static void printResults(PrintWriter pen, WordleBoard board, boolean winCon, int numGuess,
       String finWord) {
     if (winCon) {
       pen.println("Congratulations!");
@@ -79,7 +79,7 @@ public class WordleUI {
 
     numGuesses = eyes.nextLine();
     int numGuessesInt = Integer.parseInt(numGuesses);
-    wordleBoard currentBoard = new wordleBoard(wordList.wordLength(), numGuessesInt);
+    WordleBoard currentBoard = new WordleBoard(wordList.wordLength(), numGuessesInt);
 
     /* Repeatedly check the users most recent entry and print the result. */
     while ((!curWord.equals(finWord)) && (curGuess < numGuessesInt)) {
