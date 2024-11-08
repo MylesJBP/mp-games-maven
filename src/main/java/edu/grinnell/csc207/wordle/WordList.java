@@ -1,23 +1,10 @@
 package edu.grinnell.csc207.wordle;
 
-import edu.grinnell.csc207.util.ArrayUtils;
-import edu.grinnell.csc207.util.IOUtils;
-import edu.grinnell.csc207.util.Matrix;
-import edu.grinnell.csc207.util.MatrixV0;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -26,15 +13,21 @@ import java.util.Random;
  * @author Myles Bohrer-Purnell
  * @author Sebastian Manza
  */
+
 public class WordList {
+
+  /** The underlying storage list of words. */
   String[] wordList = new String[180000];
+  /** The size of the word list. */
   int size = 0;
+  /** The length of the word to be guessed. */
   int wordLength;
+  /** A randomly generated word. */
   String randWord;
 
   /**
    * Creates a new WordList object that stores a list of lengthWord length words.
-   * 
+   *
    * @param file The input file
    * @param lengthWord The length of the word
    * @throws FileNotFoundException if the file does not exist
@@ -62,7 +55,7 @@ public class WordList {
 
   /**
    * Gets the word list.
-   * 
+   *
    * @return the array of words
    */
   public String[] getWordList() {
@@ -89,7 +82,7 @@ public class WordList {
 
   /**
    * Returns whether a word is in the word list.
-   * 
+   *
    * @param word The word we are checking for
    * @return true if the word is in the list, else false
    */
@@ -103,8 +96,8 @@ public class WordList {
   } // inList(word)
 
   /**
-   * returns the length of the words in the list
-   * 
+   * returns the length of the words in the list.
+   *
    * @return an integer length of word
    */
   public int wordLength() {

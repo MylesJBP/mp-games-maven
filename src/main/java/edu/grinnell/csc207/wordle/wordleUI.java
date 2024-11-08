@@ -1,17 +1,13 @@
 package edu.grinnell.csc207.wordle;
 
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.time.chrono.ThaiBuddhistChronology;
 import java.util.Scanner;
 
-import edu.grinnell.csc207.util.Matrix;
-import edu.grinnell.csc207.wordle.wordleBoard;
 
 
 /**
  * The basic text based interface behind the wordle game.
- * 
+ *
  * @author Myles Bohrer-Purnell
  * @author Sebastian Manza
  */
@@ -41,6 +37,9 @@ public class wordleUI {
    *
    * @param pen What to use for printing.
    * @param board The game board at the end.
+   * @param winCon If the win was won or lost.
+   * @param numGuess THe number of guesses so far.
+   * @param finWord The correct word.
    */
   static void printResults(PrintWriter pen, wordleBoard board, boolean winCon, int numGuess,
       String finWord) {
@@ -53,6 +52,11 @@ public class wordleUI {
     } // if/else
   } // printResults
 
+  /**
+   * Main function.
+   * @param args The args
+   * @throws Exception if file is not found or if file is not read properly.
+   */
   public static void main(String[] args) throws Exception {
     String numGuesses;
     boolean winCon = false;
