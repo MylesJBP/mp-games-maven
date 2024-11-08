@@ -63,6 +63,7 @@ public class WordleUI {
     Scanner eyes = new Scanner(System.in);
     PrintWriter pen = new PrintWriter(System.out, true);
     String curWord = "";
+    String wordLength = "";
     // current guess of the user
     int curGuess = 0;
 
@@ -70,8 +71,14 @@ public class WordleUI {
     printInstructions(pen);
 
     /* Prompt user for length and number of guesses */
-    pen.println("Enter the length of your word:");
-    String wordLength = eyes.nextLine();
+    do {
+      pen.println("Enter the length of your word:");
+      wordLength = eyes.nextLine();
+      if (Integer.parseInt(wordLength) > 12 || Integer.parseInt(wordLength) < 2) {
+        pen.println("Incorrect word length. Please enter a number from 2-12");
+      }
+    } while (Integer.parseInt(wordLength) > 12 || Integer.parseInt(wordLength) < 2);
+
     WordList wordList = new WordList("words.txt", Integer.parseInt(wordLength));
 
     String finWord = wordList.getRandWord();
