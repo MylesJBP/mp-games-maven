@@ -3,6 +3,8 @@ package edu.grinnell.csc207.wordle;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import edu.grinnell.csc207.util.ArrayUtils;
+
 
 
 /**
@@ -58,12 +60,16 @@ public class WordleUI {
    * @throws Exception if file is not found or if file is not read properly.
    */
   public static void main(String[] args) throws Exception {
-    String numGuesses;
+    String numGuesses = "";
+    String[] validLen = new String[] {"2", "3", "4", "5", "6", "7", "8", "9",
+                                      "10", "11", "12"};
     boolean winCon = false;
     Scanner eyes = new Scanner(System.in);
     PrintWriter pen = new PrintWriter(System.out, true);
     String curWord = "";
     String wordLength = "";
+    boolean validNumGuesses = false;
+    int numGuessesInt = 0;
     // current guess of the user
     int curGuess = 0;
 
@@ -74,18 +80,23 @@ public class WordleUI {
     do {
       pen.println("Enter the length of your word:");
       wordLength = eyes.nextLine();
-      if (Integer.parseInt(wordLength) > 12 || Integer.parseInt(wordLength) < 2) {
+      if (!ArrayUtils.arrayContainsCI(validLen, wordLength)) {
         pen.println("Incorrect word length. Please enter a number from 2-12");
-      }
-    } while (Integer.parseInt(wordLength) > 12 || Integer.parseInt(wordLength) < 2);
+      } // if
+    } while (!ArrayUtils.arrayContainsCI(validLen, wordLength));
 
     WordList wordList = new WordList("words.txt", Integer.parseInt(wordLength));
-
     String finWord = wordList.getRandWord();
-    pen.println("Enter the maximum limit of guesses:");
-
-    numGuesses = eyes.nextLine();
-    int numGuessesInt = Integer.parseInt(numGuesses);
+    while (!validNumGuesses) {
+      try {
+        pen.println("Enter the maximum limit of guesses:");
+        numGuesses = eyes.nextLine();
+        numGuessesInt = Integer.parseInt(numGuesses);
+        validNumGuesses = true;
+      } catch (NumberFormatException nfe) {
+        pen.println("Incorrect Input: Please enter a number.");
+      } // try/catch
+    } // while
     WordleBoard currentBoard = new WordleBoard(wordList.wordLength(), numGuessesInt);
 
     /* Repeatedly check the users most recent entry and print the result. */
